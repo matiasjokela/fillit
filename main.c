@@ -18,16 +18,19 @@ int	main(int argc, char **argv)
 	char	***arr;
 
 	arr = (char ***)malloc(sizeof(char **) * 26);
-	if (argc != 2 || arr == NULL)
+	if (argc != 2)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0 || read_input(fd, arr) == -1)
 		return (-1);
 	
+	for (int i = 0; i <= 'S' - 'A'; i++)
+	{
+		for (int j = 0; j < 5; j++)
+			printf("%s\n", arr[i][j]);
+	}
 
-	printf("%p\n", arr);
-	printf("%p\n", *arr);
-	printf("%p\n", **arr);
+	
 
 
 }
