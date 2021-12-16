@@ -20,6 +20,9 @@
 
 int		main(int argc, char **argv);
 int		read_input(int fd, char ***arr);
+int		check_block_sides(char ***arr, int i, int j, int k);
+int		check_square(char ***arr, int i, int *empties, int *blocks);
+int		check_input(char ***arr, int i);
 
 #endif
 
