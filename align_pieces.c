@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fillit.h>
+#include "fillit.h"
 
 int		align_pieces(char ***arr, int i)
 {
@@ -73,10 +73,27 @@ void	move_row(char ***arr, int index)
 	j++;
 	}
 	k = 0;
-
+	while (k < 4)
+		arr[index][3][k++] = '.';
 }
 
 void	move_col(char ***arr, int index)
 {
-	
+	int	j;
+	int	k;
+
+	k = 0;
+	while (k < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			arr[index][j][k] =  arr[index][j][k + 1];
+			j++;
+		}
+	k++;
+	}
+	j = 0;
+	while (j < 4)
+		arr[index][j++][3] = '.';
 }
