@@ -38,7 +38,7 @@ int	read_input(int fd, char ***arr)
 			return (-1);
 		i++;
 	}
-	return (1);
+	return (align_pieces(arr, i));
 }
 
 int	check_input(char ***arr, int i)
