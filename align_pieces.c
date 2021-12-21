@@ -25,7 +25,7 @@ int		align_pieces(char ***arr, int i)
 			move_col(arr, arr_index);
 		arr_index++;
 	}
-	return (1);
+	return (arr_index);
 }
 
 int		check_row(char ***arr, int index)

@@ -15,22 +15,35 @@
 int	main(int argc, char **argv)
 {
 	int		fd;
+	int		piece_count;
 	char	***arr;
+	char	**bin_arr;
 
 	arr = (char ***)malloc(sizeof(char **) * 26);
-	if (argc != 2)
+	bin_arr = (char **)malloc(sizeof(char *) * 26);
+	if (argc != 2 || arr == NULL || bin_arr == NULL)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
-	if (fd < 0 || read_input(fd, arr) == -1)
+	piece_count = read_input(fd, arr);
+	if (fd < 0 || piece_count == -1)
 		return (-1);
-	
-	for (int i = 0; i <= 'S' - 'A'; i++)
+	//convert_to_binary(arr, bin_arr, piece_count);
+	solve_map(bin_arr, convert_to_binary(arr, bin_arr, piece_count));
+/*
+	for (int i = 0; i <= 'C' - 'A'; i++)
 	{
 		for (int j = 0; j < 5; j++)
 			printf("%s\n", arr[i][j]);
 	}
 
-	
+	for (int i = 0; i <= 'C' - 'A'; i++)
+	{
+		for (int j = 0; j < 4; j++)
+			printf("%d\n", bin_arr[i][j]);
+	}
+*/
 
+	
+	return (0);
 
 }
