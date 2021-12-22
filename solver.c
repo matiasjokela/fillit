@@ -12,23 +12,22 @@
 
 #include "fillit.h"
 
-char **solve_map(char **bin_arr, int piece_count)
+char **solve_map(int **bin_arr, int piece_count)
 {
-	(void)piece_count;
-	(void)bin_arr;
-
 	int	*map;
 	int	side_len;
 
 	side_len = 2;
-	map = (int *)malloc(sizeof(int) * 32);
+	map = (int *)malloc(sizeof(int) * 19);
 	if (map == NULL)
 		exit(-1);
 	while (side_len * side_len < piece_count * 4)
 		side_len++;
 	give_map(map, side_len);
+	map[0] = map[0] + bin_arr[0][0];
 	for (int i = 0; i < 15; i++)
 		print_bits(map[i]);
+	plant_piece(bin_arr, map, 0, side_len);
 
 	//printf("%d\n", map[0] | bin_arr[0][0] | bin_arr[1][0] | bin_arr[2][0]);
 
@@ -36,18 +35,20 @@ char **solve_map(char **bin_arr, int piece_count)
 
 }
 
+void	plant_piece(int **bin_arr, int *map, int i, int side_len)
+{
+	(void)i;
+	(void)side_len;
+	(void)map;
+	print_bits(bin_arr[0][0] & bin_arr[1][1]);
+}
+
 void	give_map(int *map, int side_len)
 {
 	int	mask;
 	int	i;
 
-	mask = 1;
-	i = 0;
-	while (i < side_len)
-	{
-		mask *= 2;
-		i++;
-	}
+	mask = 1 << side_len;
 	i = 0;
 	while (i < side_len)
 		map[i++] = mask;

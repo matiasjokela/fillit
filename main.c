@@ -17,10 +17,10 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		piece_count;
 	char	***arr;
-	char	**bin_arr;
+	int		**bin_arr;
 
 	arr = (char ***)malloc(sizeof(char **) * 26);
-	bin_arr = (char **)malloc(sizeof(char *) * 26);
+	bin_arr = (int **)malloc(sizeof(int *) * 26);
 	if (argc != 2 || arr == NULL || bin_arr == NULL)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
@@ -29,19 +29,21 @@ int	main(int argc, char **argv)
 		return (-1);
 	//convert_to_binary(arr, bin_arr, piece_count);
 	solve_map(bin_arr, convert_to_binary(arr, bin_arr, piece_count));
-/*
+
 	for (int i = 0; i <= 'C' - 'A'; i++)
 	{
 		for (int j = 0; j < 5; j++)
 			printf("%s\n", arr[i][j]);
 	}
 
-	for (int i = 0; i <= 'C' - 'A'; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 4; j++)
-			printf("%d\n", bin_arr[i][j]);
+		for (int j = 0; j < 24; j++)
+			//printf("%d\n", bin_arr[i][j]);
+			print_bits(bin_arr[i][j]);
+		printf("\n");
 	}
-*/
+
 
 	
 	return (0);

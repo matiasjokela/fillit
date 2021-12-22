@@ -30,10 +30,11 @@ int		check_row(char ***arr, int index);
 int		check_col(char ***arr, int index);
 void	move_row(char ***arr, int index);
 void	move_col(char ***arr, int index);
-int		convert_to_binary(char ***arr, char **bin_arr, int piece_count);
-char	 **solve_map(char **bin_arr, int piece_count);
+int		convert_to_binary(char ***arr, int **bin_arr, int piece_count);
+char	 **solve_map(int **bin_arr, int piece_count);
 void	print_bits(int n);
 void	give_map(int *map, int side_len);
+void	plant_piece(int **bin_arr, int *map, int i, int side_len);
 
 #endif
 

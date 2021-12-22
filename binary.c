@@ -12,18 +12,18 @@
 
 #include "fillit.h"
 
-int	convert_to_binary(char ***arr, char **bin_arr, int piece_count)
+int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 {
 
 	int		i;
 	int		j;
-	char	bin;
+	int		bin;
 
 	i = 0;
 	while (i < piece_count)
 	{
 		j = 0;
-		bin_arr[i] = (char *)malloc(sizeof(char *) * 4);
+		bin_arr[i] = (int *)malloc(sizeof(int *) * 23);
 		if (bin_arr[i] == NULL)
 			exit(-1); // free all
 		while (j < 4)
@@ -37,7 +37,9 @@ int	convert_to_binary(char ***arr, char **bin_arr, int piece_count)
 				bin += 4;
 			if (arr[i][j][3] != '.')
 				bin += 8;
-			bin_arr[i][j++] = bin;
+			bin_arr[i][j] = bin;
+			bin_arr[i][j + 20] = bin;
+			j++;
 		}			
 		i++;
 	}
