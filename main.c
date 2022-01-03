@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	//convert_to_binary(arr, bin_arr, piece_count);
 	solve_map(bin_arr, convert_to_binary(arr, bin_arr, piece_count));
-
+/*
 	for (int i = 0; i <= 'C' - 'A'; i++)
 	{
 		for (int j = 0; j < 5; j++)
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 			print_bits(bin_arr[i][j]);
 		printf("\n");
 	}
-
+*/
 
 	
 	return (0);
