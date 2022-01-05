@@ -36,6 +36,7 @@ void	print_bits(int n);
 void	give_map(int *map, int side_len);
 int		plant_piece(int **bin_arr, int *map, int i, int side_len);
 int		move_piece(int **bin_arr, int *map, int i, int side_len);
+void	move_to_next_row(int **bin_arr, int i);
 
 #endif
 
