@@ -27,23 +27,8 @@ int	main(int argc, char **argv)
 	piece_count = read_input(fd, arr);
 	if (fd < 0 || piece_count == -1)
 		return (-1);
-	//convert_to_binary(arr, bin_arr, piece_count);
 	solve_map(bin_arr, convert_to_binary(arr, bin_arr, piece_count));
-/*
-	for (int i = 0; i <= 'C' - 'A'; i++)
-	{
-		for (int j = 0; j < 5; j++)
-			printf("%s\n", arr[i][j]);
-	}
 
-	for (int i = 0; i < 1; i++)
-	{
-		for (int j = 0; j < 24; j++)
-			//printf("%d\n", bin_arr[i][j]);
-			print_bits(bin_arr[i][j]);
-		printf("\n");
-	}
-*/
 
 	
 	return (0);

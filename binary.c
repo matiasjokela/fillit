@@ -23,7 +23,7 @@ int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 	while (i < piece_count)
 	{
 		j = 0;
-		bin_arr[i] = (int *)malloc(sizeof(int *) * 23);
+		bin_arr[i] = (int *)malloc(sizeof(int *) * 24);
 		if (bin_arr[i] == NULL)
 			exit(-1); // free all
 		while (j < 4)
@@ -43,5 +43,6 @@ int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 		}			
 		i++;
 	}
+	bin_arr[0][24] = piece_count;
 	return (i);
 }

@@ -39,15 +39,8 @@ int	solve_map(int **bin_arr, int piece_count)
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
 {
-	// base case, jolla break
-	for (int a = 0; a < 22; a++)
-	{
-		print_bits(map[a]);
-	}	
-	sleep(1);
-	printf("\n");
-	// rekursio
-	while (1 == 1)
+
+	while (1)
 	{
 		while (plant_piece(bin_arr, map, i, side_len) == 0)
 		{
@@ -57,10 +50,13 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 				return (0);
 			}
 		}
+		if (bin_arr[0][24] == i + 1)
+		{
+			show_output(bin_arr, side_len);
+			exit(1);
+		}
 		solver(bin_arr, map, i + 1, side_len);
 		pop_piece(map, bin_arr, i);
-
-
 		if (move_piece(bin_arr, map, i, side_len) == 0)
 		{
 			restore_piece(bin_arr, i);
@@ -73,6 +69,56 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 
 
 
+}
+
+void	show_output(int **bin_arr, int side_len)
+{
+	char	solution[side_len][side_len];
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	while (i < side_len)
+	{
+		j = 0;
+		while (j < side_len)
+		{
+			solution[i][j] = '.';
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < bin_arr[0][24])
+	{
+		j = 0;
+		while (j < side_len)
+		{
+			k = 0;
+			while (k < side_len)
+			{
+				if ((bin_arr[i][j] & 1) == 1)
+					solution[j][k] = i + 'A';
+				bin_arr[i][j] = bin_arr[i][j] >> 1;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}		
+	i = 0;
+	while (i < side_len)
+	{
+		j = 0;
+		while (j < side_len)
+		{
+			ft_putchar(solution[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
 }
 
 /* Plants piece to next available space, 
