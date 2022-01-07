@@ -31,7 +31,7 @@ int		check_col(char ***arr, int index);
 void	move_row(char ***arr, int index);
 void	move_col(char ***arr, int index);
 int		convert_to_binary(char ***arr, int **bin_arr, int piece_count);
-char	 **solve_map(int **bin_arr, int piece_count);
+int		solve_map(int **bin_arr, int piece_count);
 void	print_bits(int n);
 void	give_map(int *map, int side_len);
 int		plant_piece(int **bin_arr, int *map, int i, int side_len);
@@ -39,6 +39,7 @@ int		move_piece(int **bin_arr, int *map, int i, int side_len);
 int		move_to_next_row(int **bin_arr, int i, int side_len);
 void	restore_piece(int **bin_arr, int i);
 void	pop_piece(int *map, int **bin_arr, int i);
+int		solver(int **bin_arr, int *map, int i, int side_len);
 
 #endif
 
