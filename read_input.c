@@ -80,7 +80,6 @@ int	check_square(char ***arr, int i, int *empties, int *blocks)
 			{
 				blocks[0]++;
 				x += check_block_sides(arr, i, j, k);
-				arr[i][j][k] = i + 'A';
 			}
 			k++;
 		}

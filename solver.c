@@ -126,26 +126,22 @@ returns 1 if piece can be planted and 0 if not*/
 int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 {
 	int	j;
-	int	b;
 
 	j = 0;
-	b = 1;
 	while (j < side_len)
 	{
 		if ((map[j] & bin_arr[i][j]) != 0)
-			b = 0;
+			return (0);
 		j++;
 	}
-	if (b == 1)
-	{
 		j = 0;
 		while (j < side_len)
 		{
 			map[j] += bin_arr[i][j];
 			j++;
 		}	
-	}
-	return (b);
+
+	return (1);
 }
 
 void	give_map(int *map, int side_len)
