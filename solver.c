@@ -64,11 +64,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 		}
 	
 	}
-
 	return (1);
-
-
-
 }
 
 void	show_output(int **bin_arr, int side_len)
