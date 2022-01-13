@@ -56,7 +56,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 			exit(1);
 		}
 		solver(bin_arr, map, i + 1, side_len);
-		pop_piece(map, bin_arr, i);
+		pop_piece(map, bin_arr, i, side_len);
 		if (move_piece(bin_arr, map, i, side_len) == 0)
 		{
 			restore_piece(bin_arr, i);
@@ -167,7 +167,7 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 	{
 		// Check if piece is out of bounds without moving it yet
 		if ((bin_arr[i][j] << 1 & mask) != 0)
-			return (move_to_next_row(bin_arr, i, side_len));
+			return (move_to_next_row(bin_arr, i, side_len, map));
 		else
 			bin_arr[i][j] = bin_arr[i][j] << 1;
 		j++;
@@ -176,15 +176,13 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 	return (1);
 }
 
-int	move_to_next_row(int **bin_arr, int i, int side_len)
+int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 {
 	int	a;
 	int b;
 
 	a = 0;
 	b = 0;
-
-	
 	while (a < 20)
 	{
 		if (bin_arr[i][a] != 0)
@@ -202,9 +200,36 @@ int	move_to_next_row(int **bin_arr, int i, int side_len)
 		}
 		a++;
 	}
+	// print_bits(map[a + 1]);
+	// print_bits(MAX << (side_len + 1));
+	// print_bits(map[a + 1] ^ MAX << (side_len + 1));
+	// printf("\n");
 	if (bin_arr[i][side_len] != 0)
 		return (0);
-
+	while ((map[a + 1] ^ MAX << (side_len + 1)) == -1)
+	{
+		a = 0;
+		while (a < 20)
+		{
+			if (bin_arr[i][a] != 0)
+			{
+				bin_arr[i][a] = 0;
+				if (a + 1 < 20)
+					bin_arr[i][a + 1] = bin_arr[i][20];
+				if (a + 2 < 20)
+					bin_arr[i][a + 2] = bin_arr[i][21];
+				if (a + 3 < 20)
+					bin_arr[i][a + 3] = bin_arr[i][22];
+				if (a + 4 < 20)
+					bin_arr[i][a + 4] = bin_arr[i][23];
+				break ;
+			}
+			a++;
+		}
+		if (bin_arr[i][side_len] != 0)
+			return (0);
+	}
+	//move_to_next_row(bin_arr, i, side_len, map);
 	return (1);
 
 }
@@ -227,12 +252,12 @@ void	restore_piece(int **bin_arr, int i)
 	}	
 }
 
-void	pop_piece(int *map, int **bin_arr, int i)
+void	pop_piece(int *map, int **bin_arr, int i, int side_len)
 {
 	int a;
 
 	a = 0;
-	while (a < 20)
+	while (a < side_len)
 	{
 		map[a] -= bin_arr[i][a];
 		a++;
