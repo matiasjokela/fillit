@@ -39,6 +39,9 @@ int	solve_map(int **bin_arr, int piece_count)
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
 {
+
+	/*if (bin_arr[i][0] != 15)
+		skip_row(bin_arr, map, i, side_len);*/
 	restart_piece(bin_arr, map, i, side_len);
 	while (1)
 	{
@@ -65,6 +68,48 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 	
 	}
 	return (1);
+}
+
+void	skip_row(int **bin_arr, int *map, int i, int side_len)
+{
+	int	a;
+	int	tmp;
+	int temp;
+
+	a = 0;
+	tmp = ~map[a] << (sizeof(int) * 8 - side_len);
+	temp = ~map[a + 1] << (sizeof(int) * 8 - side_len);
+
+	
+	while ((tmp & temp) == 0 && (a + 3) <= side_len)
+	{
+		if (move_to_next_row(bin_arr, i, side_len, map) == 0)
+			return ;
+		a++;
+		tmp = ~map[a] << (sizeof(int) * 8 - side_len);
+		temp = ~map[a + 1] << (sizeof(int) * 8 - side_len);
+		/*printf("map:\n");
+		for (int p = 0; p < 19; p++)
+		{
+			print_bits(map[p]);
+		}
+		printf("piece:\n");
+		for (int p = 0; p < 19; p++)
+		{
+			
+			print_bits(bin_arr[i][p]);
+			
+		}
+		sleep(1);*/
+	}
+		
+
+
+	// print_bits(tmp);
+	// print_bits(temp);
+	// printf("\n");
+	// sleep(1);
+	
 }
 
 void	show_output(int **bin_arr, int side_len)
@@ -205,7 +250,10 @@ int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 	// print_bits(map[a + 1] ^ MAX << (side_len + 1));
 	// printf("\n");
 	if (bin_arr[i][side_len] != 0)
+	{
+		//restore_piece(bin_arr, i);
 		return (0);
+	}
 	while ((map[a + 1] ^ MAX << (side_len + 1)) == -1)
 	{
 		a = 0;
@@ -227,7 +275,11 @@ int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 			a++;
 		}
 		if (bin_arr[i][side_len] != 0)
+		{
+			//restore_piece(bin_arr, i);
 			return (0);
+		}
+		
 	}
 	//move_to_next_row(bin_arr, i, side_len, map);
 	return (1);
