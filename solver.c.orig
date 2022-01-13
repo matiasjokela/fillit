@@ -39,7 +39,7 @@ int	solve_map(int **bin_arr, int piece_count)
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
 {
-	restart_piece(bin_arr, map, i, side_len);
+
 	while (1)
 	{
 		while (plant_piece(bin_arr, map, i, side_len) == 0)
@@ -172,7 +172,6 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 			bin_arr[i][j] = bin_arr[i][j] << 1;
 		j++;
 	}
-
 	return (1);
 }
 
@@ -202,6 +201,7 @@ int	move_to_next_row(int **bin_arr, int i, int side_len)
 		}
 		a++;
 	}
+
 	if (bin_arr[i][side_len] != 0)
 		return (0);
 
@@ -236,33 +236,6 @@ void	pop_piece(int *map, int **bin_arr, int i)
 	{
 		map[a] -= bin_arr[i][a];
 		a++;
-	}
-}
-
-void	restart_piece(int **bin_arr, int *map, int i, int side_len)
-{
-	int	a;
-	int	b;
-	(void)map;
-	(void)side_len;
-
-	a = i - 1;
-	while (a >= 0)
-	{
-		if (bin_arr[i][20] == bin_arr[a][20] \
-			&& bin_arr[i][21] == bin_arr[a][21] \
-			&& bin_arr[i][22] == bin_arr[a][22] \
-			&& bin_arr[i][23] == bin_arr[a][23])
-		{
-			b = 0;
-			while (b < 20)
-			{
-				bin_arr[i][b] = bin_arr[a][b];
-				b++;
-			}
-			return ;
-		}
-		a--;
 	}
 }
 

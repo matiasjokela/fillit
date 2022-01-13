@@ -41,6 +41,7 @@ void	restore_piece(int **bin_arr, int i);
 void	pop_piece(int *map, int **bin_arr, int i);
 int		solver(int **bin_arr, int *map, int i, int side_len);
 void	show_output(int **bin_arr, int side_len);
+void	restart_piece(int **bin_arr, int *map, int i, int side_len);
 
 #endif
 
