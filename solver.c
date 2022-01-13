@@ -211,17 +211,29 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 {
 	// Function only called if piece needs to be moved
 	int j;
-	int	mask;
+	int	m;
 	(void)map;
 
 	j = 0;
-	mask = 1 << side_len;
+	m = 1 << side_len;
+
+	if ((bin_arr[i][0] << 1 & m) != 0 || (bin_arr[i][1] << 1 & m) != 0 || \
+		(bin_arr[i][2] << 1 & m) != 0 || (bin_arr[i][3] << 1 & m) != 0 || \
+		(bin_arr[i][4] << 1 & m) != 0 || (bin_arr[i][5] << 1 & m) != 0 || \
+		(bin_arr[i][6] << 1 & m) != 0 || (bin_arr[i][7] << 1 & m) != 0 || \
+		(bin_arr[i][8] << 1 & m) != 0 || (bin_arr[i][9] << 1 & m) != 0 || \
+		(bin_arr[i][10] << 1 & m) != 0 || (bin_arr[i][11] << 1 & m) != 0 || \
+		(bin_arr[i][12] << 1 & m) != 0 || (bin_arr[i][13] << 1 & m) != 0)
+		{
+			return (move_to_next_row(bin_arr, i, side_len, map));
+		}
+
 	while (j < side_len)
 	{
 		// Check if piece is out of bounds without moving it yet
-		if ((bin_arr[i][j] << 1 & mask) != 0)
+		/*if ((bin_arr[i][j] << 1 & m) != 0)
 			return (move_to_next_row(bin_arr, i, side_len, map));
-		else
+		else*/
 			bin_arr[i][j] = bin_arr[i][j] << 1;
 		j++;
 	}
