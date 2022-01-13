@@ -227,16 +227,30 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 		{
 			return (move_to_next_row(bin_arr, i, side_len, map));
 		}
+	bin_arr[i][0] = bin_arr[i][0] << 1;
+	bin_arr[i][1] = bin_arr[i][1] << 1;
+	bin_arr[i][2] = bin_arr[i][2] << 1;
+	bin_arr[i][3] = bin_arr[i][3] << 1;
+	bin_arr[i][4] = bin_arr[i][4] << 1;
+	bin_arr[i][5] = bin_arr[i][5] << 1;
+	bin_arr[i][6] = bin_arr[i][6] << 1;
+	bin_arr[i][7] = bin_arr[i][7] << 1;
+	bin_arr[i][8] = bin_arr[i][8] << 1;
+	bin_arr[i][9] = bin_arr[i][9] << 1;
+	bin_arr[i][10] = bin_arr[i][10] << 1;
+	bin_arr[i][11] = bin_arr[i][11] << 1;
+	bin_arr[i][12] = bin_arr[i][12] << 1;
+	bin_arr[i][13] = bin_arr[i][13] << 1;
 
-	while (j < side_len)
-	{
-		// Check if piece is out of bounds without moving it yet
-		/*if ((bin_arr[i][j] << 1 & m) != 0)
-			return (move_to_next_row(bin_arr, i, side_len, map));
-		else*/
-			bin_arr[i][j] = bin_arr[i][j] << 1;
-		j++;
-	}
+	// while (j < side_len)
+	// {
+	// 	// Check if piece is out of bounds without moving it yet
+	// 	/*if ((bin_arr[i][j] << 1 & m) != 0)
+	// 		return (move_to_next_row(bin_arr, i, side_len, map));
+	// 	else*/
+	// 		bin_arr[i][j] = bin_arr[i][j] << 1;
+	// 	j++;
+	// }
 
 	return (1);
 }
