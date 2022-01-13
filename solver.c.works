@@ -39,6 +39,9 @@ int	solve_map(int **bin_arr, int piece_count)
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
 {
+
+	/*if (bin_arr[i][0] != 15)
+		skip_row(bin_arr, map, i, side_len);*/
 	restart_piece(bin_arr, map, i, side_len);
 	while (1)
 	{
@@ -166,29 +169,18 @@ int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 	int	j;
 
 	j = 0;
-	if ((map[0] & bin_arr[i][0]) != 0 || (map[1] & bin_arr[i][1]) != 0 || \
-		(map[2] & bin_arr[i][2]) != 0 || (map[3] & bin_arr[i][3]) != 0 || \
-		(map[4] & bin_arr[i][4]) != 0 || (map[5] & bin_arr[i][5]) != 0 || \
-		(map[6] & bin_arr[i][6]) != 0 || (map[7] & bin_arr[i][7]) != 0 || \
-		(map[8] & bin_arr[i][8]) != 0 || \
-		(map[9] & bin_arr[i][9]) != 0 || (map[10] & bin_arr[i][10]) != 0 || \
-		(map[11] & bin_arr[i][11]) != 0 || (map[12] & bin_arr[i][12]) != 0 || \
-		(map[13] & bin_arr[i][13]) != 0 || (map[14] & bin_arr[i][14]) != 0)
-	{
-		return (0);
-	}
-	/*while (j < side_len)
+	while (j < side_len)
 	{
 		if ((map[j] & bin_arr[i][j]) != 0)
 			return (0);
 		j++;
 	}
-	j = 0;*/
-	while (j < side_len)
-	{
-		map[j] += bin_arr[i][j];
-		j++;
-	}	
+		j = 0;
+		while (j < side_len)
+		{
+			map[j] += bin_arr[i][j];
+			j++;
+		}	
 
 	return (1);
 }
