@@ -121,11 +121,9 @@ void	show_output(int **bin_arr, int side_len)
 returns 1 if piece can be planted and 0 if not*/
 int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 {
-	int	j;
 	int	x;
 	int m;
 
-	j = 0;
 	x = bin_arr[i][19];
 	m = 1 << side_len;
 	while ((map[x] & bin_arr[i][x]) != 0 || \
@@ -148,12 +146,10 @@ int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 		}
 		x = bin_arr[i][19];
 	}
-	while (j < side_len)
-	{
-		map[j] += bin_arr[i][j];
-		j++;
-	}	
-
+	map[x] += bin_arr[i][x];
+	map[x + 1] += bin_arr[i][x + 1];
+	map[x + 2] += bin_arr[i][x + 2];
+	map[x + 3] += bin_arr[i][x + 3];
 	return (1);
 }
 
