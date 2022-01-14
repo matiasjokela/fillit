@@ -164,16 +164,14 @@ returns 1 if piece can be planted and 0 if not*/
 int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 {
 	int	j;
+	int	x;
 
 	j = 0;
-	if ((map[0] & bin_arr[i][0]) != 0 || (map[1] & bin_arr[i][1]) != 0 || \
-		(map[2] & bin_arr[i][2]) != 0 || (map[3] & bin_arr[i][3]) != 0 || \
-		(map[4] & bin_arr[i][4]) != 0 || (map[5] & bin_arr[i][5]) != 0 || \
-		(map[6] & bin_arr[i][6]) != 0 || (map[7] & bin_arr[i][7]) != 0 || \
-		(map[8] & bin_arr[i][8]) != 0 || \
-		(map[9] & bin_arr[i][9]) != 0 || (map[10] & bin_arr[i][10]) != 0 || \
-		(map[11] & bin_arr[i][11]) != 0 || (map[12] & bin_arr[i][12]) != 0 || \
-		(map[13] & bin_arr[i][13]) != 0 || (map[14] & bin_arr[i][14]) != 0)
+	x = bin_arr[i][19];
+	if ((map[x] & bin_arr[i][x]) != 0 || \
+		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
+		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
+		(map[x + 3] & bin_arr[i][x + 3]) != 0)
 	{
 		return (0);
 	}
@@ -212,35 +210,22 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 	// Function only called if piece needs to be moved
 	int j;
 	int	m;
+	int	x;
 	(void)map;
 
 	j = 0;
 	m = 1 << side_len;
-
-	if ((bin_arr[i][0] << 1 & m) != 0 || (bin_arr[i][1] << 1 & m) != 0 || \
-		(bin_arr[i][2] << 1 & m) != 0 || (bin_arr[i][3] << 1 & m) != 0 || \
-		(bin_arr[i][4] << 1 & m) != 0 || (bin_arr[i][5] << 1 & m) != 0 || \
-		(bin_arr[i][6] << 1 & m) != 0 || (bin_arr[i][7] << 1 & m) != 0 || \
-		(bin_arr[i][8] << 1 & m) != 0 || (bin_arr[i][9] << 1 & m) != 0 || \
-		(bin_arr[i][10] << 1 & m) != 0 || (bin_arr[i][11] << 1 & m) != 0 || \
-		(bin_arr[i][12] << 1 & m) != 0 || (bin_arr[i][13] << 1 & m) != 0)
+	x = bin_arr[i][19];
+	if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
+		(bin_arr[i][x + 2] << 1 & m) != 0 || (bin_arr[i][x + 3] << 1 & m) != 0)
 		{
 			return (move_to_next_row(bin_arr, i, side_len, map));
 		}
-	bin_arr[i][0] = bin_arr[i][0] << 1;
-	bin_arr[i][1] = bin_arr[i][1] << 1;
-	bin_arr[i][2] = bin_arr[i][2] << 1;
-	bin_arr[i][3] = bin_arr[i][3] << 1;
-	bin_arr[i][4] = bin_arr[i][4] << 1;
-	bin_arr[i][5] = bin_arr[i][5] << 1;
-	bin_arr[i][6] = bin_arr[i][6] << 1;
-	bin_arr[i][7] = bin_arr[i][7] << 1;
-	bin_arr[i][8] = bin_arr[i][8] << 1;
-	bin_arr[i][9] = bin_arr[i][9] << 1;
-	bin_arr[i][10] = bin_arr[i][10] << 1;
-	bin_arr[i][11] = bin_arr[i][11] << 1;
-	bin_arr[i][12] = bin_arr[i][12] << 1;
-	bin_arr[i][13] = bin_arr[i][13] << 1;
+	bin_arr[i][x] = bin_arr[i][x] << 1;
+	bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
+	bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
+	bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
+
 
 	// while (j < side_len)
 	// {
@@ -269,6 +254,7 @@ int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 			bin_arr[i][a + 2] = bin_arr[i][21];
 			bin_arr[i][a + 3] = bin_arr[i][22];
 			bin_arr[i][a + 4] = bin_arr[i][23];
+			bin_arr[i][19]++;
 			break ;
 		}
 		a++;
@@ -286,6 +272,7 @@ int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 				bin_arr[i][a + 2] = bin_arr[i][21];
 				bin_arr[i][a + 3] = bin_arr[i][22];
 				bin_arr[i][a + 4] = bin_arr[i][23];
+				bin_arr[i][19]++;
 				a++;
 				break ;
 			}
@@ -313,6 +300,7 @@ void	restore_piece(int **bin_arr, int i)
 	bin_arr[i][10] = 0;
 	bin_arr[i][11] = 0;
 	bin_arr[i][12] = 0;
+	bin_arr[i][19] = 0;
 }
 
 void	pop_piece(int *map, int **bin_arr, int i, int side_len)
