@@ -43,14 +43,10 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 	while (1)
 	{
 
-		while (plant_piece(bin_arr, map, i, side_len) == 0)
+		if (plant_piece(bin_arr, map, i, side_len) == 0)
 		{
-			if (move_piece(bin_arr, map, i, side_len) == 0)
-			{
-				restore_piece(bin_arr, i);
-				return (0);
-			}
-
+			restore_piece(bin_arr, i);
+			return (0);
 		}
 		if (bin_arr[0][24] == i + 1)
 		{
@@ -127,25 +123,31 @@ int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 {
 	int	j;
 	int	x;
+	int m;
 
 	j = 0;
 	x = bin_arr[i][19];
-
-	if ((map[x] & bin_arr[i][x]) != 0 || \
+	m = 1 << side_len;
+	while ((map[x] & bin_arr[i][x]) != 0 || \
 		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
 		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
 		(map[x + 3] & bin_arr[i][x + 3]) != 0)
-	{
-		//if (move_piece(bin_arr, map, i, side_len) == 0)
-			return (0);
+	{	
+		if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
+			(bin_arr[i][x + 2] << 1 & m) != 0 || (bin_arr[i][x + 3] << 1 & m) != 0)
+			{
+				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
+					return (0);
+			}
+		else
+		{
+			bin_arr[i][x] = bin_arr[i][x] << 1;
+			bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
+			bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
+			bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
+		}
+		x = bin_arr[i][19];
 	}
-	/*while (j < side_len)
-	{
-		if ((map[j] & bin_arr[i][j]) != 0)
-			return (0);
-		j++;
-	}
-	j = 0;*/
 	while (j < side_len)
 	{
 		map[j] += bin_arr[i][j];
