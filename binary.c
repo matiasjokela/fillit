@@ -44,5 +44,25 @@ int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 		i++;
 	}
 	bin_arr[0][24] = piece_count;
+	piece_row_count(bin_arr, piece_count);
 	return (i);
+}
+
+void	piece_row_count(int **bin_arr, int piece_count)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (i < piece_count)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (bin_arr[i][j] != 0)
+				bin_arr[i][18]++;
+			j++;
+		}
+		i++;
+	}
 }
