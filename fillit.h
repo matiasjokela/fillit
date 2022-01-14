@@ -34,7 +34,6 @@ int		convert_to_binary(char ***arr, int **bin_arr, int piece_count);
 int		solve_map(int **bin_arr, int piece_count);
 void	print_bits(int n);
 void	give_map(int *map, int side_len);
-int		plant_piece(int **bin_arr, int *map, int i, int side_len);
 int		move_piece(int **bin_arr, int *map, int i, int side_len);
 int		move_to_next_row(int **bin_arr, int i, int side_len, int *map);
 void	restore_piece(int **bin_arr, int i);
@@ -43,6 +42,11 @@ int		solver(int **bin_arr, int *map, int i, int side_len);
 void	show_output(int **bin_arr, int side_len);
 void	clone_piece(int **bin_arr, int *map, int i, int side_len);
 void	piece_row_count(int **bin_arr, int piece_count);
+int		plant_piece(int **bin_arr, int *map, int i, int side_len);
+int		plant_piece_1(int **bin_arr, int *map, int i, int side_len);
+int		plant_piece_2(int **bin_arr, int *map, int i, int side_len);
+int		plant_piece_3(int **bin_arr, int *map, int i, int side_len);
+int		plant_piece_4(int **bin_arr, int *map, int i, int side_len);
 
 #endif
 

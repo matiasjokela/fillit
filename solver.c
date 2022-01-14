@@ -42,7 +42,6 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 	clone_piece(bin_arr, map, i, side_len);
 	while (1)
 	{
-
 		if (plant_piece(bin_arr, map, i, side_len) == 0)
 		{
 			restore_piece(bin_arr, i);
@@ -117,41 +116,7 @@ void	show_output(int **bin_arr, int side_len)
 	}
 }
 
-/* Plants piece to next available space, 
-returns 1 if piece can be planted and 0 if not*/
-int	plant_piece(int **bin_arr, int *map, int i, int side_len)
-{
-	int	x;
-	int m;
 
-	x = bin_arr[i][19];
-	m = 1 << side_len;
-	while ((map[x] & bin_arr[i][x]) != 0 || \
-		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
-		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
-		(map[x + 3] & bin_arr[i][x + 3]) != 0)
-	{	
-		if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
-			(bin_arr[i][x + 2] << 1 & m) != 0 || (bin_arr[i][x + 3] << 1 & m) != 0)
-			{
-				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
-					return (0);
-			}
-		else
-		{
-			bin_arr[i][x] = bin_arr[i][x] << 1;
-			bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
-			bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
-			bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
-		}
-		x = bin_arr[i][19];
-	}
-	map[x] += bin_arr[i][x];
-	map[x + 1] += bin_arr[i][x + 1];
-	map[x + 2] += bin_arr[i][x + 2];
-	map[x + 3] += bin_arr[i][x + 3];
-	return (1);
-}
 
 void	give_map(int *map, int side_len)
 {
