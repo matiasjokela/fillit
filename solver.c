@@ -206,32 +206,30 @@ int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 
 void	restore_piece(int **bin_arr, int i)
 {
+	int	x;
+
+	x = bin_arr[i][19];
 	bin_arr[i][0] = bin_arr[i][20];
 	bin_arr[i][1] = bin_arr[i][21];
 	bin_arr[i][2] = bin_arr[i][22];
 	bin_arr[i][3] = bin_arr[i][23];
-	bin_arr[i][4] = 0;
-	bin_arr[i][5] = 0;
-	bin_arr[i][6] = 0;
-	bin_arr[i][7] = 0;
-	bin_arr[i][8] = 0;
-	bin_arr[i][9] = 0;
-	bin_arr[i][10] = 0;
-	bin_arr[i][11] = 0;
-	bin_arr[i][12] = 0;
+	bin_arr[i][x] = 0;
+	bin_arr[i][x + 1] = 0;
+	bin_arr[i][x + 2] = 0;
+	bin_arr[i][x + 3] = 0;
 	bin_arr[i][19] = 0;
 }
 
 void	pop_piece(int *map, int **bin_arr, int i, int side_len)
 {
 	int a;
+	(void)side_len;
 
-	a = 0;
-	while (a < side_len)
-	{
-		map[a] -= bin_arr[i][a];
-		a++;
-	}
+	a = bin_arr[i][19];
+	map[a] -= bin_arr[i][a];
+	map[a + 1] -= bin_arr[i][a + 1];
+	map[a + 2] -= bin_arr[i][a + 2];
+	map[a + 3] -= bin_arr[i][a + 3];
 }
 
 void	clone_piece(int **bin_arr, int *map, int i, int side_len)

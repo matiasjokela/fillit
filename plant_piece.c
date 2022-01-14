@@ -26,17 +26,17 @@ int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 int	plant_piece_1(int **bin_arr, int *map, int i, int side_len)
 {
 	int	x;
-	int m;
+	int	m;
 
 	x = bin_arr[i][19];
 	m = 1 << side_len;
 	while ((map[x] & bin_arr[i][x]) != 0)
 	{	
 		if ((bin_arr[i][x] << 1 & m) != 0)
-			{
-				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
-					return (0);
-			}
+		{
+			if (move_to_next_row(bin_arr, i, side_len, map) == 0)
+				return (0);
+		}
 		else
 		{
 			bin_arr[i][x] = bin_arr[i][x] << 1;
@@ -50,7 +50,7 @@ int	plant_piece_1(int **bin_arr, int *map, int i, int side_len)
 int	plant_piece_2(int **bin_arr, int *map, int i, int side_len)
 {
 	int	x;
-	int m;
+	int	m;
 
 	x = bin_arr[i][19];
 	m = 1 << side_len;
@@ -58,10 +58,10 @@ int	plant_piece_2(int **bin_arr, int *map, int i, int side_len)
 		(map[x + 1] & bin_arr[i][x + 1]) != 0)
 	{	
 		if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0)
-			{
-				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
-					return (0);
-			}
+		{
+			if (move_to_next_row(bin_arr, i, side_len, map) == 0)
+				return (0);
+		}
 		else
 		{
 			bin_arr[i][x] = bin_arr[i][x] << 1;
@@ -74,41 +74,39 @@ int	plant_piece_2(int **bin_arr, int *map, int i, int side_len)
 	return (1);
 }
 
-int	plant_piece_3(int **bin_arr, int *map, int i, int side_len)
+int	plant_piece_3(int **ba, int *map, int i, int side_len)
 {
 	int	x;
-	int m;
 
-	x = bin_arr[i][19];
-	m = 1 << side_len;
-	while ((map[x] & bin_arr[i][x]) != 0 || \
-		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
-		(map[x + 2] & bin_arr[i][x + 2]) != 0)
+	x = ba[i][19];
+	while ((map[x] & ba[i][x]) != 0 || (map[x + 1] & ba[i][x + 1]) != 0 || \
+			(map[x + 2] & ba[i][x + 2]) != 0)
 	{	
-		if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
-			(bin_arr[i][x + 2] << 1 & m) != 0)
-			{
-				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
-					return (0);
-			}
+		if ((ba[i][x] << 1 & (1 << side_len)) != 0 || \
+			(ba[i][x + 1] << 1 & (1 << side_len)) != 0 || \
+			(ba[i][x + 2] << 1 & (1 << side_len)) != 0)
+		{
+			if (move_to_next_row(ba, i, side_len, map) == 0)
+				return (0);
+		}
 		else
 		{
-			bin_arr[i][x] = bin_arr[i][x] << 1;
-			bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
-			bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
+			ba[i][x] = ba[i][x] << 1;
+			ba[i][x + 1] = ba[i][x + 1] << 1;
+			ba[i][x + 2] = ba[i][x + 2] << 1;
 		}
-		x = bin_arr[i][19];
+		x = ba[i][19];
 	}
-	map[x] += bin_arr[i][x];
-	map[x + 1] += bin_arr[i][x + 1];
-	map[x + 2] += bin_arr[i][x + 2];
+	map[x] += ba[i][x];
+	map[x + 1] += ba[i][x + 1];
+	map[x + 2] += ba[i][x + 2];
 	return (1);
 }
 
 int	plant_piece_4(int **bin_arr, int *map, int i, int side_len)
 {
 	int	x;
-	int m;
+	int	m;
 
 	x = bin_arr[i][19];
 	m = 1 << side_len;
@@ -117,19 +115,8 @@ int	plant_piece_4(int **bin_arr, int *map, int i, int side_len)
 		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
 		(map[x + 3] & bin_arr[i][x + 3]) != 0)
 	{	
-		if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
-			(bin_arr[i][x + 2] << 1 & m) != 0 || (bin_arr[i][x + 3] << 1 & m) != 0)
-			{
-				if (move_to_next_row(bin_arr, i, side_len, map) == 0)
-					return (0);
-			}
-		else
-		{
-			bin_arr[i][x] = bin_arr[i][x] << 1;
-			bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
-			bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
-			bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
-		}
+		if (move_piece(bin_arr, map, i, side_len) == 0)
+			return (0);
 		x = bin_arr[i][19];
 	}
 	map[x] += bin_arr[i][x];
