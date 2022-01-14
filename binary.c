@@ -14,38 +14,41 @@
 
 int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 {
-
 	int		i;
-	int		j;
-	int		bin;
 
 	i = 0;
 	while (i < piece_count)
 	{
-		j = 0;
 		bin_arr[i] = (int *)malloc(sizeof(int *) * 24);
 		if (bin_arr[i] == NULL)
-			exit(-1); // free all
-		while (j < 4)
-		{
-			bin = 0;
-			if (arr[i][j][0] != '.')
-				bin += 1;
-			if (arr[i][j][1] != '.')
-				bin += 2;
-			if (arr[i][j][2] != '.')
-				bin += 4;
-			if (arr[i][j][3] != '.')
-				bin += 8;
-			bin_arr[i][j] = bin;
-			bin_arr[i][j + 20] = bin;
-			j++;
-		}			
+			exit(-1);
+		fill_bin_arr(arr, bin_arr, i, 0);
 		i++;
 	}
+	free_char_arr(arr, piece_count);
 	bin_arr[0][24] = piece_count;
 	piece_row_count(bin_arr, piece_count);
 	return (i);
+}
+
+void	fill_bin_arr(char ***arr, int **bin_arr, int i, int j)
+{
+	int		bin;
+	while (j < 4)
+	{
+		bin = 0;
+		if (arr[i][j][0] != '.')
+			bin += 1;
+		if (arr[i][j][1] != '.')
+			bin += 2;
+		if (arr[i][j][2] != '.')
+			bin += 4;
+		if (arr[i][j][3] != '.')
+			bin += 8;
+		bin_arr[i][j] = bin;
+		bin_arr[i][j + 20] = bin;
+		j++;
+	}
 }
 
 void	piece_row_count(int **bin_arr, int piece_count)
@@ -65,4 +68,17 @@ void	piece_row_count(int **bin_arr, int piece_count)
 		}
 		i++;
 	}
+}
+
+void	free_char_arr(char ***arr, int piece_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < piece_count)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

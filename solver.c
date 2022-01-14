@@ -39,7 +39,7 @@ int	solve_map(int **bin_arr, int piece_count)
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
 {
-	clone_piece(bin_arr, map, i, side_len);
+	clone_piece(bin_arr, i);
 	while (1)
 	{
 		if (plant_piece(bin_arr, map, i, side_len) == 0)
@@ -53,7 +53,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 			exit(1);
 		}
 		solver(bin_arr, map, i + 1, side_len);
-		pop_piece(map, bin_arr, i, side_len);
+		pop_piece(map, bin_arr, i);
 		if (move_piece(bin_arr, map, i, side_len) == 0)
 		{
 			restore_piece(bin_arr, i);
@@ -64,57 +64,6 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 	return (1);
 }
 
-
-
-void	show_output(int **bin_arr, int side_len)
-{
-	char	solution[side_len][side_len];
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	while (i < side_len)
-	{
-		j = 0;
-		while (j < side_len)
-		{
-			solution[i][j] = '.';
-			j++;
-		}
-		i++;
-	}
-	i = 0;
-	while (i < bin_arr[0][24])
-	{
-		j = 0;
-		while (j < side_len)
-		{
-			k = 0;
-			while (k < side_len)
-			{
-				if ((bin_arr[i][j] & 1) == 1)
-					solution[j][k] = i + 'A';
-				bin_arr[i][j] = bin_arr[i][j] >> 1;
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}		
-	i = 0;
-	while (i < side_len)
-	{
-		j = 0;
-		while (j < side_len)
-		{
-			ft_putchar(solution[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-}
 
 
 
@@ -130,134 +79,6 @@ void	give_map(int *map, int side_len)
 	map[i] = MAX;
 }
 
-/* Moves piece to next available space, 
-returns 1 if space was found and 0 if not */
-int	move_piece(int **bin_arr, int *map, int i, int side_len)
-{
-	// Function only called if piece needs to be moved
-	int j;
-	int	m;
-	int	x;
-	(void)map;
-
-	j = 0;
-	m = 1 << side_len;
-	x = bin_arr[i][19];
-	if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \
-		(bin_arr[i][x + 2] << 1 & m) != 0 || (bin_arr[i][x + 3] << 1 & m) != 0)
-		{
-			return (move_to_next_row(bin_arr, i, side_len, map));
-		}
-	bin_arr[i][x] = bin_arr[i][x] << 1;
-	bin_arr[i][x + 1] = bin_arr[i][x + 1] << 1;
-	bin_arr[i][x + 2] = bin_arr[i][x + 2] << 1;
-	bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
-
-
-
-
-	return (1);
-}
-
-int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
-{
-	int	a;
-
-	a = 0;
-	while (a < 13)
-	{
-		if (bin_arr[i][a] != 0)
-		{
-			bin_arr[i][a] = 0;
-			bin_arr[i][a + 1] = bin_arr[i][20];
-			bin_arr[i][a + 2] = bin_arr[i][21];
-			bin_arr[i][a + 3] = bin_arr[i][22];
-			bin_arr[i][a + 4] = bin_arr[i][23];
-			bin_arr[i][19]++;
-			break ;
-		}
-		a++;
-	}
-	if (bin_arr[i][side_len] != 0)
-		return (0);
-	while ((map[a + 1] ^ MAX << (side_len + 1)) == -1)
-	{
-		while (a < 13)
-		{
-			if (bin_arr[i][a] != 0)
-			{
-				bin_arr[i][a] = 0;
-				bin_arr[i][a + 1] = bin_arr[i][20];
-				bin_arr[i][a + 2] = bin_arr[i][21];
-				bin_arr[i][a + 3] = bin_arr[i][22];
-				bin_arr[i][a + 4] = bin_arr[i][23];
-				bin_arr[i][19]++;
-				a++;
-				break ;
-			}
-			a++;
-		}
-		if (bin_arr[i][side_len] != 0)
-			return (0);
-	}
-	return (1);
-}
-
-
-void	restore_piece(int **bin_arr, int i)
-{
-	int	x;
-
-	x = bin_arr[i][19];
-	bin_arr[i][0] = bin_arr[i][20];
-	bin_arr[i][1] = bin_arr[i][21];
-	bin_arr[i][2] = bin_arr[i][22];
-	bin_arr[i][3] = bin_arr[i][23];
-	bin_arr[i][x] = 0;
-	bin_arr[i][x + 1] = 0;
-	bin_arr[i][x + 2] = 0;
-	bin_arr[i][x + 3] = 0;
-	bin_arr[i][19] = 0;
-}
-
-void	pop_piece(int *map, int **bin_arr, int i, int side_len)
-{
-	int a;
-	(void)side_len;
-
-	a = bin_arr[i][19];
-	map[a] -= bin_arr[i][a];
-	map[a + 1] -= bin_arr[i][a + 1];
-	map[a + 2] -= bin_arr[i][a + 2];
-	map[a + 3] -= bin_arr[i][a + 3];
-}
-
-void	clone_piece(int **bin_arr, int *map, int i, int side_len)
-{
-	int	a;
-	int	b;
-	(void)map;
-	(void)side_len;
-
-	a = i - 1;
-	while (a >= 0)
-	{
-		if (bin_arr[i][20] == bin_arr[a][20] \
-			&& bin_arr[i][21] == bin_arr[a][21] \
-			&& bin_arr[i][22] == bin_arr[a][22] \
-			&& bin_arr[i][23] == bin_arr[a][23])
-		{
-			b = 0;
-			while (b < 20)
-			{
-				bin_arr[i][b] = bin_arr[a][b];
-				b++;
-			}
-			return ;
-		}
-		a--;
-	}
-}
 
 void	print_bits(int n)
 {

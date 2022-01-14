@@ -21,12 +21,19 @@ int	main(int argc, char **argv)
 
 	arr = (char ***)malloc(sizeof(char **) * 26);
 	bin_arr = (int **)malloc(sizeof(int *) * 26);
-	if (argc != 2 || arr == NULL || bin_arr == NULL)
+	if (argc != 2)
+	{
+		ft_putstr("usage: fillit source_file\n");
+		exit(1);
+	}
+	if (arr == NULL || bin_arr == NULL)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
-	piece_count = read_input(fd, arr);
-	if (fd < 0 || piece_count == -1)
-		return (-1);
+	if (fd < 0)
+		print_error();
+	piece_count = read_input(fd, arr);	
+	if (piece_count == -1)
+		print_error();
 	solve_map(bin_arr, convert_to_binary(arr, bin_arr, piece_count));
 
 

@@ -38,6 +38,8 @@ int	read_input(int fd, char ***arr)
 			return (-1);
 		i++;
 	}
+	if (get != 0)
+		print_error();
 	return (align_pieces(arr, i));
 }
 
