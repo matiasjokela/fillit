@@ -258,84 +258,61 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 int	move_to_next_row(int **bin_arr, int i, int side_len, int *map)
 {
 	int	a;
-	int b;
 
 	a = 0;
-	b = 0;
-	while (a < 20)
+	while (a < 13)
 	{
 		if (bin_arr[i][a] != 0)
 		{
 			bin_arr[i][a] = 0;
-			if (a + 1 < 20)
-				bin_arr[i][a + 1] = bin_arr[i][20];
-			if (a + 2 < 20)
-				bin_arr[i][a + 2] = bin_arr[i][21];
-			if (a + 3 < 20)
-				bin_arr[i][a + 3] = bin_arr[i][22];
-			if (a + 4 < 20)
-				bin_arr[i][a + 4] = bin_arr[i][23];
+			bin_arr[i][a + 1] = bin_arr[i][20];
+			bin_arr[i][a + 2] = bin_arr[i][21];
+			bin_arr[i][a + 3] = bin_arr[i][22];
+			bin_arr[i][a + 4] = bin_arr[i][23];
 			break ;
 		}
 		a++;
 	}
-	// print_bits(map[a + 1]);
-	// print_bits(MAX << (side_len + 1));
-	// print_bits(map[a + 1] ^ MAX << (side_len + 1));
-	// printf("\n");
 	if (bin_arr[i][side_len] != 0)
-	{
-		//restore_piece(bin_arr, i);
 		return (0);
-	}
 	while ((map[a + 1] ^ MAX << (side_len + 1)) == -1)
 	{
-		a = 0;
-		while (a < 20)
+		while (a < 13)
 		{
 			if (bin_arr[i][a] != 0)
 			{
 				bin_arr[i][a] = 0;
-				if (a + 1 < 20)
-					bin_arr[i][a + 1] = bin_arr[i][20];
-				if (a + 2 < 20)
-					bin_arr[i][a + 2] = bin_arr[i][21];
-				if (a + 3 < 20)
-					bin_arr[i][a + 3] = bin_arr[i][22];
-				if (a + 4 < 20)
-					bin_arr[i][a + 4] = bin_arr[i][23];
+				bin_arr[i][a + 1] = bin_arr[i][20];
+				bin_arr[i][a + 2] = bin_arr[i][21];
+				bin_arr[i][a + 3] = bin_arr[i][22];
+				bin_arr[i][a + 4] = bin_arr[i][23];
+				a++;
 				break ;
 			}
 			a++;
 		}
 		if (bin_arr[i][side_len] != 0)
-		{
-			//restore_piece(bin_arr, i);
 			return (0);
-		}
-		
 	}
-	//move_to_next_row(bin_arr, i, side_len, map);
 	return (1);
-
 }
 
 
 void	restore_piece(int **bin_arr, int i)
 {
-	int	a;
-
-	a = 0;
-	while (a < 4)
-	{
-		bin_arr[i][a] = bin_arr[i][a + 20];
-		a++;
-	}
-	while (a < 20)
-	{
-		bin_arr[i][a] = 0;
-		a++;
-	}	
+	bin_arr[i][0] = bin_arr[i][20];
+	bin_arr[i][1] = bin_arr[i][21];
+	bin_arr[i][2] = bin_arr[i][22];
+	bin_arr[i][3] = bin_arr[i][23];
+	bin_arr[i][4] = 0;
+	bin_arr[i][5] = 0;
+	bin_arr[i][6] = 0;
+	bin_arr[i][7] = 0;
+	bin_arr[i][8] = 0;
+	bin_arr[i][9] = 0;
+	bin_arr[i][10] = 0;
+	bin_arr[i][11] = 0;
+	bin_arr[i][12] = 0;
 }
 
 void	pop_piece(int *map, int **bin_arr, int i, int side_len)
