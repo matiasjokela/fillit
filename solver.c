@@ -42,6 +42,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 	clone_piece(bin_arr, map, i, side_len);
 	while (1)
 	{
+
 		while (plant_piece(bin_arr, map, i, side_len) == 0)
 		{
 			if (move_piece(bin_arr, map, i, side_len) == 0)
@@ -49,6 +50,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 				restore_piece(bin_arr, i);
 				return (0);
 			}
+
 		}
 		if (bin_arr[0][24] == i + 1)
 		{
@@ -128,12 +130,14 @@ int	plant_piece(int **bin_arr, int *map, int i, int side_len)
 
 	j = 0;
 	x = bin_arr[i][19];
+
 	if ((map[x] & bin_arr[i][x]) != 0 || \
 		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
 		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
 		(map[x + 3] & bin_arr[i][x + 3]) != 0)
 	{
-		return (0);
+		//if (move_piece(bin_arr, map, i, side_len) == 0)
+			return (0);
 	}
 	/*while (j < side_len)
 	{
@@ -187,15 +191,7 @@ int	move_piece(int **bin_arr, int *map, int i, int side_len)
 	bin_arr[i][x + 3] = bin_arr[i][x + 3] << 1;
 
 
-	// while (j < side_len)
-	// {
-	// 	// Check if piece is out of bounds without moving it yet
-	// 	/*if ((bin_arr[i][j] << 1 & m) != 0)
-	// 		return (move_to_next_row(bin_arr, i, side_len, map));
-	// 	else*/
-	// 		bin_arr[i][j] = bin_arr[i][j] << 1;
-	// 	j++;
-	// }
+
 
 	return (1);
 }
