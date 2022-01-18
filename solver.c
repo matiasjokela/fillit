@@ -23,8 +23,6 @@ int	solve_map(int **bin_arr, int piece_count)
 		exit(-1);
 	while (side_len * side_len < piece_count * 4)
 		side_len++;
-
-
 	while (side_len < 20)
 	{
 		give_map(map, side_len);
@@ -34,7 +32,6 @@ int	solve_map(int **bin_arr, int piece_count)
 	}
 	free(map);
 	return (1);
-
 }
 
 int	solver(int **bin_arr, int *map, int i, int side_len)
@@ -59,13 +56,9 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 			restore_piece(bin_arr, i);
 			return (0);
 		}
-	
 	}
 	return (1);
 }
-
-
-
 
 void	give_map(int *map, int side_len)
 {
@@ -76,22 +69,5 @@ void	give_map(int *map, int side_len)
 	i = 0;
 	while (i < side_len)
 		map[i++] = mask;
-	map[i] = MAX;
-}
-
-
-void	print_bits(int n)
-{
-	int i;
-	int arr[32];
-
-	i = 0;
-	while (i < 32)
-	{
-		arr[i] = (n & 1);
-		ft_putnbr(arr[i]);
-		n = n >> 1;
-		i++;
-	}
-	ft_putchar('\n');
+	map[i] = 2147483647;
 }

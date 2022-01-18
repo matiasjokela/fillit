@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int		align_pieces(char ***arr, int i)
+int	align_pieces(char ***arr, int i)
 {
 	int	arr_index;
 
@@ -28,9 +28,9 @@ int		align_pieces(char ***arr, int i)
 	return (arr_index);
 }
 
-int		check_row(char ***arr, int index)
+int	check_row(char ***arr, int index)
 {
-	int k;
+	int	k;
 
 	k = 0;
 	while (arr[index][0][k])
@@ -42,9 +42,9 @@ int		check_row(char ***arr, int index)
 	return (1);
 }
 
-int		check_col(char ***arr, int index)
+int	check_col(char ***arr, int index)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (arr[index][j][0])
@@ -62,12 +62,12 @@ void	move_row(char ***arr, int index)
 	int	k;
 
 	j = 0;
-	while (j < 3)
+	while (j < 4)
 	{
 		k = 0;
 		while (arr[index][j][k])
 		{
-			arr[index][j][k] =  arr[index][j + 1][k];
+			arr[index][j][k] = arr[index][j + 1][k];
 			k++;
 		}
 	j++;
@@ -83,12 +83,12 @@ void	move_col(char ***arr, int index)
 	int	k;
 
 	k = 0;
-	while (k < 3)
+	while (k < 4)
 	{
 		j = 0;
-		while (j < 3)
+		while (j < 4)
 		{
-			arr[index][j][k] =  arr[index][j][k + 1];
+			arr[index][j][k] = arr[index][j][k + 1];
 			j++;
 		}
 	k++;

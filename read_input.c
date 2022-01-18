@@ -12,11 +12,10 @@
 
 #include "fillit.h"
 
-int	read_input(int fd, char ***arr)
+int	read_input(int fd, char ***arr, char *line)
 {
 	int		i;
 	int		j;
-	char	*line;
 	int		get;
 
 	i = 0;
@@ -30,13 +29,12 @@ int	read_input(int fd, char ***arr)
 		while (j < 5)
 		{			
 			get = get_next_line(fd, &line);
-			if (get == -1)
-				exit(-1);
+			if (get == -1 || (get == 0 && i == 0 && j == 0))
+				print_error();
 			arr[i][j++] = line;
 		}
-		if (check_input(arr, i) == -1)
+		if (check_input(arr, i++) == -1)
 			return (-1);
-		i++;
 	}
 	if (get != 0)
 		print_error();

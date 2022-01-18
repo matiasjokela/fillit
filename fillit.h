@@ -16,11 +16,7 @@
 # include "./libft/libft.h"
 # include <fcntl.h>
 
-#include <stdio.h>					// REMOVE!!
-
-# define MAX 2147483647
-
-int		read_input(int fd, char ***arr);
+int		read_input(int fd, char ***arr, char *line);
 int		check_block_sides(char ***arr, int i, int j, int k);
 int		check_square(char ***arr, int i, int *empties, int *blocks);
 int		check_input(char ***arr, int i);
@@ -53,4 +49,3 @@ void	free_char_arr(char ***arr, int piece_count);
 void	print_error(void);
 
 #endif
-

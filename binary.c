@@ -33,7 +33,8 @@ int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 
 void	fill_bin_arr(char ***arr, int **bin_arr, int i, int j)
 {
-	int		bin;
+	int	bin;
+
 	while (j < 4)
 	{
 		bin = 0;
@@ -54,7 +55,7 @@ void	fill_bin_arr(char ***arr, int **bin_arr, int i, int j)
 void	piece_row_count(int **bin_arr, int piece_count)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < piece_count)
