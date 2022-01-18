@@ -18,7 +18,7 @@ int	solve_map(int **bin_arr, int piece_count)
 	int	side_len;
 
 	side_len = 2;
-	map = (int *)malloc(sizeof(int) * 19);
+	map = (int *)ft_memalloc(sizeof(int) * 19);
 	if (map == NULL)
 		exit(-1);
 	while (side_len * side_len < piece_count * 4)
@@ -30,7 +30,6 @@ int	solve_map(int **bin_arr, int piece_count)
 			break ;
 		side_len++;
 	}
-	free(map);
 	return (1);
 }
 

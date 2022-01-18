@@ -19,7 +19,7 @@ int	convert_to_binary(char ***arr, int **bin_arr, int piece_count)
 	i = 0;
 	while (i < piece_count)
 	{
-		bin_arr[i] = (int *)malloc(sizeof(int *) * 24);
+		bin_arr[i] = (int *)ft_memalloc(sizeof(int *) * 24);
 		if (bin_arr[i] == NULL)
 			exit(-1);
 		fill_bin_arr(arr, bin_arr, i, 0);
@@ -74,10 +74,17 @@ void	piece_row_count(int **bin_arr, int piece_count)
 void	free_char_arr(char ***arr, int piece_count)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < piece_count)
 	{
+		j = 0;
+		while (j < 5)
+		{
+			free(arr[i][j]);
+			j++;
+		}
 		free(arr[i]);
 		i++;
 	}

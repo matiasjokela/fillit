@@ -11,25 +11,27 @@
 # **************************************************************************** #
 
 NAME = fillit
-SRCS = 
-
-HEADER = fillit.h
-O_FILES = 
+SRCS = align_pieces.c binary.c end_game.c main.c piece_manipulation.c \
+plant_piece.c read_input.c solver.c
+LIBFT = libft/libft.a
+O_FILES = $(SRCS:.c=.o)
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME):
-	gcc -Wall -Wextra -Werror -o $(NAME) $(SRSC) -L. -lft $(HEADER) $(SRCS);
-	ar rc $(NAME) $(O_FILES);
-	ranlib $(NAME);
+$(NAME): $(O_FILES) $(LIBFT)
+	gcc -Wall -Wextra -Werror -o $@ $^
+
+$(LIBFT):
+	$(MAKE) -C libft
 
 clean:
-	rm -f $(O_FILES)  libft.h.gch;
+	$(MAKE) -C libft clean
+	rm -f $(O_FILES)
 
 fclean:	
-	rm -f $(O_FILES) $(NAME) libft.h.gch;
+	$(MAKE) -C libft fclean
+	rm -f $(O_FILES) $(NAME)
 
 re: fclean all
-
