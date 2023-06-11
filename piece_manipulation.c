@@ -14,11 +14,9 @@
 
 int	move_piece(int **bin_arr, int *map, int i, int side_len)
 {
-	int	j;
 	int	m;
 	int	x;
 
-	j = 0;
 	m = 1 << side_len;
 	x = bin_arr[i][19];
 	if ((bin_arr[i][x] << 1 & m) != 0 || (bin_arr[i][x + 1] << 1 & m) != 0 || \

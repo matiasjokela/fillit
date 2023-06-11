@@ -50,7 +50,7 @@ int	solver(int **bin_arr, int *map, int i, int side_len)
 		}
 		solver(bin_arr, map, i + 1, side_len);
 		pop_piece(map, bin_arr, i);
-		if (move_piece(bin_arr, map, i, side_len) == 0)
+		if (move_piece(bin_arr, map, i, side_len) == 0) //
 		{
 			restore_piece(bin_arr, i);
 			return (0);

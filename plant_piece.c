@@ -106,10 +106,8 @@ int	plant_piece_3(int **ba, int *map, int i, int side_len)
 int	plant_piece_4(int **bin_arr, int *map, int i, int side_len)
 {
 	int	x;
-	int	m;
 
 	x = bin_arr[i][19];
-	m = 1 << side_len;
 	while ((map[x] & bin_arr[i][x]) != 0 || \
 		(map[x + 1] & bin_arr[i][x + 1]) != 0 || \
 		(map[x + 2] & bin_arr[i][x + 2]) != 0 || \
